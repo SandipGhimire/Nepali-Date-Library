@@ -480,9 +480,9 @@ export class NepaliDate {
             throw new Error('Invalid month index, must be between 0-11');
         }
         let result = '';
-        if(nepali){
+        if (nepali) {
             result = short ? MONTH_SHORT_NP[month] : MONTH_NP[month]
-        }else{
+        } else {
             result = short ? MONTH_SHORT_EN[month] : MONTH_EN[month]
         }
 
@@ -501,9 +501,9 @@ export class NepaliDate {
         }
 
         let result = '';
-        if(nepali){
+        if (nepali) {
             result = short ? WEEK_SHORT_NP[day] : WEEK_NP[day]
-        }else{
+        } else {
             result = short ? WEEK_SHORT_EN[day] : WEEK_EN[day]
         }
 
@@ -553,14 +553,25 @@ export class NepaliDate {
      * Generate calendar days for a given month, including trailing/leading days from adjacent months
      * @param year Nepali year
      * @param month Nepali month (0-11)
-     * @returns Array of day objects with date and isCurrentMonth flag
+     * @returns An object containing the calendar days for the previous month, current month, and next month.
+     * The object also includes the remaining days and the day objects for each month, 
+     * with each day object containing the date and a flag indicating whether it is part of the current month.
      */
-    public static getCalendarDays(year: number, month: number): { date: number, isCurrentMonth: boolean }[] {
+    public static getCalendarDays(year: number, month: number): {
+        prevRemainingDays: number,
+        prevMonth: { year: number, month: number, days: number[] },
+        currentMonth: { year: number, month: number, days: number[] },
+        nextMonth: { year: number, month: number, days: number[] },
+        remainingDays: number
+    } {
         if (!NepaliDate.isValid(year, month, 1)) {
             throw new Error('Invalid year or month');
         }
 
-        const result: { date: number, isCurrentMonth: boolean }[] = [];
+        const prevMonthMap: { year: number, month: number, days: number[] } = { year: 0, month: 0, days: [] }
+        const currentMonthMap: { year: number, month: number, days: number[] } = { year: 0, month: 0, days: [] }
+        const nextMonthMap: { year: number, month: number, days: number[] } = { year: 0, month: 0, days: [] }
+
         const yearIndex = year - NEPALI_DATE_MAP[0].year;
 
         const firstDay = new NepaliDate(year, month, 1);
@@ -568,55 +579,57 @@ export class NepaliDate {
 
         const daysInMonth = NEPALI_DATE_MAP[yearIndex].days[month];
 
-        if (firstDayOfWeek > 0) {
-            let prevMonth = month - 1;
-            let prevYear = year;
-            if (prevMonth < 0) {
-                prevMonth = 11;
-                prevYear--;
-            }
+        currentMonthMap.year = year;
+        currentMonthMap.month = month;
 
-            if (prevYear >= NEPALI_DATE_MAP[0].year) {
-                const prevMonthIndex = prevYear - NEPALI_DATE_MAP[0].year;
-                const daysInPrevMonth = NEPALI_DATE_MAP[prevMonthIndex].days[prevMonth];
+        let prevMonth = month - 1;
+        let prevYear = year;
 
-                for (let i = 0; i < firstDayOfWeek; i++) {
-                    result.push({
-                        date: daysInPrevMonth - firstDayOfWeek + i + 1,
-                        isCurrentMonth: false
-                    });
-                }
+        let nextMonth = month + 1;
+        let nextYear = year;
+
+        if (prevMonth < 0) {
+            prevMonth = 11;
+            prevYear--;
+        }
+
+        if (prevYear > NEPALI_DATE_MAP[0].year) {
+            prevMonthMap.year = prevYear;
+            prevMonthMap.month = prevMonth;
+        }
+
+        if (prevYear >= NEPALI_DATE_MAP[0].year && firstDayOfWeek > 0) {
+            const prevMonthIndex = prevYear - NEPALI_DATE_MAP[0].year;
+            const daysInPrevMonth = NEPALI_DATE_MAP[prevMonthIndex].days[prevMonth];
+
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                prevMonthMap.days.push(daysInPrevMonth - firstDayOfWeek + i + 1);
             }
         }
 
         for (let i = 1; i <= daysInMonth; i++) {
-            result.push({
-                date: i,
-                isCurrentMonth: true
-            });
+            currentMonthMap.days.push(i);
         }
 
-        const remainingDays = 42 - result.length;
+        if (nextMonth > 11) {
+            nextMonth = 0;
+            nextYear++;
+        }
 
-        if (remainingDays > 0) {
-            let nextMonth = month + 1;
-            let nextYear = year;
-            if (nextMonth > 11) {
-                nextMonth = 0;
-                nextYear++;
-            }
+        if (nextYear < NEPALI_DATE_MAP[0].year + NEPALI_DATE_MAP.length) {
+            nextMonthMap.year = nextYear;
+            nextMonthMap.month = nextMonth;
+        }
 
-            if (nextYear < NEPALI_DATE_MAP[0].year + NEPALI_DATE_MAP.length) {
-                for (let i = 1; i <= remainingDays; i++) {
-                    result.push({
-                        date: i,
-                        isCurrentMonth: false
-                    });
-                }
+        const remainingDays = 42 - firstDayOfWeek - currentMonthMap.days.length;
+
+        if (nextYear < NEPALI_DATE_MAP[0].year + NEPALI_DATE_MAP.length && remainingDays > 0) {
+            for (let i = 1; i <= remainingDays; i++) {
+                nextMonthMap.days.push(i);
             }
         }
 
-        return result;
+        return { prevRemainingDays: firstDayOfWeek, prevMonth: prevMonthMap, currentMonth: currentMonthMap, nextMonth: nextMonthMap, remainingDays: remainingDays, };
     }
 
     /**

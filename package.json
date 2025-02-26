@@ -1,7 +1,13 @@
 {
   "name": "nepali-date-library",
+  "private": true,
   "version": "1.0.0",
-  "private": false,
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "author": "Sandip Ghimire",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -11,11 +17,9 @@
     "types": "./dist/index.d.ts"
   },
   "scripts": {
-    "build": "tsc --emitDeclarationOnly && esbuild src/index.ts --bundle --platform=node --format=cjs --minify --outfile=dist/index.cjs && esbuild src/index.ts --bundle --platform=node --format=esm --minify --outfile=dist/index.mjs"
+    "build": "tsc --emitDeclarationOnly && esbuild src/index.ts --bundle --platform=node --format=cjs --minify --outfile=dist/index.cjs.js && esbuild src/index.ts --bundle --platform=node --format=esm --minify --outfile=dist/index.mjs.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
   "description": "",
   "devDependencies": {
     "@types/node": "^22.13.5",
