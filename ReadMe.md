@@ -67,33 +67,32 @@ set(year: number, month: number, day: number): void;
 
 #### Formatting
 ```ts
-// format(formatStr: string): string;
+format(formatStr: string): string;
 ```
 - Formats the date based on the provided format string.
-```ts
-Available Formats:
-(English)
--> YYYY - Full Year (e.g., 2080)
--> MM - Month with leading zero (01-12)
--> M - Month without leading zero (1-12)
--> MMM - Short month name (Bai, Cha)
--> MMMM - Long month name (Baisakh, Chaitra)
--> DD - Day with leading zero (01-32)
--> D - Day without leading zero (1-32)
--> DDD - Short day name (Sun, Sat)
--> DDDD - Full day name (Sunday)
 
-(Nepali)
--> yyyy - Full Year (e.g., २०८१)
--> mm - Month with leading zero (०१-१२)
--> m - Month without leading zero (१-१२)
--> mmm - Short month name (बै, चै)
--> mmmm - Long month name (बैशाख, चैत्र)
--> dd - Day with leading zero (०१-३२)
--> d - Day without leading zero (१-३२)
--> ddd - Short day name (आइत, शनि)
--> dddd - Full day name (आइतबार)
-```
+- Available Formats:
+  - English
+    - YYYY - Full Year (e.g., 2080)
+    - MM - Month with leading zero (01-12)
+    - M - Month without leading zero (1-12)
+    - MMM - Short month name (Bai, Cha)
+    - MMMM - Long month name (Baisakh, Chaitra)
+    - DD - Day with leading zero (01-32)
+    - D - Day without leading zero (1-32)
+    - DDD - Short day name (Sun, Sat)
+    - DDDD - Full day name (Sunday)
+
+  - Nepali
+    - yyyy - Full Year (e.g., २०८१)
+    - mm - Month with leading zero (०१-१२)
+    - m - Month without leading zero (१-१२)
+    - mmm - Short month name (बै, चै)
+    - mmmm - Long month name (बैशाख, चैत्र)
+    - dd - Day with leading zero (०१-३२)
+    - d - Day without leading zero (१-३२)
+    - ddd - Short day name (आइत, शनि)
+    - dddd - Full day name (आइतबार)
 
 
 #### Date Manipulation
