@@ -11,7 +11,7 @@ import format from './Helper/DateFormatter';
 function _parse(dateString: string): [number, number, number] {
     const parts = dateString.split(/[-./]/, 3);
 
-    const [year, month = 0, day = 1] = parts.map(d => {
+    const [year, month = 1, day = 1] = parts.map(d => {
         const n = parseInt(d, 10);
         if (Number.isNaN(n)) {
             throw new Error('Invalid date');
@@ -23,8 +23,8 @@ function _parse(dateString: string): [number, number, number] {
         throw new Error('Nepal year out of range');
     }
 
-    if (month < 0 || month > 11) {
-        throw new Error('Invalid nepali month must be between 0 - 11');
+    if (month < 1 || month > 12) {
+        throw new Error('Invalid nepali month must be between 1 - 12');
     }
 
     const daysInMonth = NEPALI_DATE_MAP[year - NEPALI_DATE_MAP[0].year].days[month - 1]
