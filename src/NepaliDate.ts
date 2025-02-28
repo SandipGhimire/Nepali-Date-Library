@@ -751,7 +751,7 @@ export class NepaliDate {
         const startMonth = (quarter - 1) * 3;
 
         const start = new NepaliDate(nepaliYear, startMonth, 1);
-        const end = new NepaliDate(nepaliYear, startMonth + 2, 0).endOfMonth();
+        const end = new NepaliDate(nepaliYear, startMonth + 2, 1).endOfMonth();
 
         return { start, end };
     }
@@ -816,8 +816,8 @@ export class NepaliDate {
         let startMonth = (quarter - 1) * 3 + 3;
 
         if (quarter === 4) {
-            startYear = currentFiscalYear + 1;
-            startMonth = 0;
+                startYear = currentFiscalYear + 1;
+                startMonth = 0;
         }
 
         if (startMonth > 11) {
@@ -834,7 +834,7 @@ export class NepaliDate {
         }
 
         const start = new NepaliDate(startYear, startMonth, 1);
-        const end = new NepaliDate(endYear, endMonth, 0).endOfMonth();
+        const end = new NepaliDate(endYear, endMonth, 1).endOfMonth();
 
         return { start, end };
     }
