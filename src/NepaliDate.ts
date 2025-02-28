@@ -435,6 +435,50 @@ export class NepaliDate {
     }
 
     /**
+     * Returns a new NepaliDate representing the start of the week containing this date
+     * By default, weeks start on Sunday (day 0)
+     * @param startOfWeek Day to consider as start of week (0-6, where 0 = Sunday, 1 = Monday, etc.)
+     * @returns A new NepaliDate set to the first day of the week
+     */
+    startOfWeek(startOfWeek: number = 0): NepaliDate {
+        // Validate startOfWeek parameter
+        if (startOfWeek < 0 || startOfWeek > 6 || !Number.isInteger(startOfWeek)) {
+            throw new Error('startOfWeek must be an integer between 0 and 6');
+        }
+
+        // Get current day of week
+        const currentDay = this.getDay();
+
+        // Calculate days to subtract to reach start of week
+        // We add 7 before taking modulo to handle negative results
+        const daysToSubtract = (currentDay - startOfWeek + 7) % 7;
+
+        // Create a new date at the start of the current day
+        const result = this.clone().startOfDay();
+
+        // Subtract the required number of days
+        return result.addDays(-daysToSubtract);
+    }
+
+    /**
+     * Returns a new NepaliDate representing the end of the week containing this date
+     * By default, weeks end on Saturday (day 6)
+     * @param startOfWeek Day to consider as start of week (0-6, where 0 = Sunday, 1 = Monday, etc.)
+     * @returns A new NepaliDate set to the last day of the week
+     */
+    endOfWeek(startOfWeek: number = 0): NepaliDate {
+        // Get the start of the week
+        const weekStart = this.startOfWeek(startOfWeek);
+
+        // End of week is 6 days after start of week
+        const result = weekStart.addDays(6);
+
+        // Set time to end of day
+        return result.endOfDay();
+    }
+
+
+    /**
      * Returns a new NepaliDate representing the start of the current month (1st day)
      * @returns A new NepaliDate set to the first day of the month
      */
@@ -689,5 +733,155 @@ export class NepaliDate {
             default:
                 throw new Error('Invalid unit for comparison');
         }
+    }
+
+    /**
+     * Returns the start and end dates for a specific quarter in the specified year
+     * @param quarter Quarter number (1-4)
+     * @param year Nepali year (defaults to current year if not specified)
+     * @returns Object containing start and end dates for the specified quarter
+     * @throws Error if quarter is not between 1 and 4
+     */
+    static getQuarter(quarter: number, year?: number): { start: NepaliDate; end: NepaliDate } {
+        if (quarter < 1 || quarter > 4 || !Number.isInteger(quarter)) {
+            throw new Error('Quarter must be an integer between 1 and 4');
+        }
+
+        const nepaliYear = year ?? new NepaliDate().getYear();
+        const startMonth = (quarter - 1) * 3;
+
+        const start = new NepaliDate(nepaliYear, startMonth, 1);
+        const end = new NepaliDate(nepaliYear, startMonth + 2, 0).endOfMonth();
+
+        return { start, end };
+    }
+
+    /**
+     * Returns the quarter number (1-4) for the current date
+     * @returns Quarter number (1-4)
+     */
+    getCurrentQuarter(): number {
+        return Math.floor(this.month / 3) + 1;
+    }
+
+    /**
+     * Returns all quarters for a specified fiscal year
+     * @param year Fiscal year (defaults to current fiscal year if not specified)
+     * @returns Object containing start and end dates for each quarter of the fiscal year
+     */
+    static getQuarters(year?: number): {
+        Q1: { start: NepaliDate; end: NepaliDate };
+        Q2: { start: NepaliDate; end: NepaliDate };
+        Q3: { start: NepaliDate; end: NepaliDate };
+        Q4: { start: NepaliDate; end: NepaliDate };
+    } {
+        const nepaliYear = year ?? new NepaliDate().getYear();
+
+        return {
+            Q1: NepaliDate.getQuarter(1, nepaliYear),
+            Q2: NepaliDate.getQuarter(2, nepaliYear),
+            Q3: NepaliDate.getQuarter(3, nepaliYear),
+            Q4: NepaliDate.getQuarter(4, nepaliYear)
+        };
+    }
+
+    /**
+     * Returns the current fiscal year based on the current date
+     * Nepali fiscal year starts from Shrawan 1st (month 3, day 1)
+     * @returns Current fiscal year
+     */
+    static getCurrentFiscalYear(): number {
+        const today = new NepaliDate();
+        const year = today.getYear();
+        const month = today.getMonth();
+
+        return month < 3 ? year - 1 : year;
+    }
+
+    /**
+     * Returns the start and end dates for a specific fiscal year quarter
+     * @param quarter Fiscal year quarter number (1-4)
+     * @param fiscalYear Fiscal year (defaults to current fiscal year if not specified)
+     * @returns Object containing start and end dates for the specified fiscal year quarter
+     * @throws Error if quarter is not between 1 and 4
+     */
+    static getFiscalYearQuarter(quarter: number, fiscalYear?: number): { start: NepaliDate; end: NepaliDate } {
+        if (quarter < 1 || quarter > 4 || !Number.isInteger(quarter)) {
+            throw new Error('Quarter must be an integer between 1 and 4');
+        }
+
+        const currentFiscalYear = fiscalYear ?? NepaliDate.getCurrentFiscalYear();
+
+        let startYear = currentFiscalYear;
+        let startMonth = (quarter - 1) * 3 + 3;
+
+        if (quarter === 4) {
+            startYear = currentFiscalYear + 1;
+            startMonth = 0;
+        }
+
+        if (startMonth > 11) {
+            startYear++;
+            startMonth -= 12;
+        }
+
+        let endMonth = startMonth + 2;
+        let endYear = startYear;
+
+        if (endMonth > 11) {
+            endYear++;
+            endMonth -= 12;
+        }
+
+        const start = new NepaliDate(startYear, startMonth, 1);
+        const end = new NepaliDate(endYear, endMonth, 0).endOfMonth();
+
+        return { start, end };
+    }
+
+    /**
+     * Returns the current fiscal year quarter number (1-4) for the current date
+     * @returns Current fiscal year quarter number (1-4)
+     */
+    getCurrentFiscalYearQuarter(): number {
+        const month = this.getMonth();
+
+        if (month >= 3 && month <= 5) return 1;
+        if (month >= 6 && month <= 8) return 2;
+        if (month >= 9 && month <= 11) return 3;
+
+        return 4;
+    }
+
+    /**
+     * Returns the start and end dates of the current fiscal year quarter
+     * @returns Object containing start and end dates of the current fiscal year quarter
+     */
+    getCurrentFiscalYearQuarterDates(): { start: NepaliDate; end: NepaliDate } {
+        const currentQuarter = this.getCurrentFiscalYearQuarter();
+        const currentFiscalYear = NepaliDate.getCurrentFiscalYear();
+
+        return NepaliDate.getFiscalYearQuarter(currentQuarter, currentFiscalYear);
+    }
+
+    /**
+     * Returns all quarters for a specified fiscal year
+     * @param fiscalYear Fiscal year (defaults to current fiscal year if not specified)
+     * @returns Object containing start and end dates for each quarter of the fiscal year
+     */
+    static getFiscalYearQuarters(fiscalYear?: number): {
+        Q1: { start: NepaliDate; end: NepaliDate };
+        Q2: { start: NepaliDate; end: NepaliDate };
+        Q3: { start: NepaliDate; end: NepaliDate };
+        Q4: { start: NepaliDate; end: NepaliDate };
+    } {
+        const year = fiscalYear ?? NepaliDate.getCurrentFiscalYear();
+
+        return {
+            Q1: NepaliDate.getFiscalYearQuarter(1, year),
+            Q2: NepaliDate.getFiscalYearQuarter(2, year),
+            Q3: NepaliDate.getFiscalYearQuarter(3, year),
+            Q4: NepaliDate.getFiscalYearQuarter(4, year)
+        };
     }
 }
