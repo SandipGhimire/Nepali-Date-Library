@@ -8,21 +8,28 @@
   ],
   "license": "MIT",
   "author": "Sandip Ghimire",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.mjs.js",
   "types": "dist/index.d.ts",
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.cjs"
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.mjs.js",
+    "require": "./dist/index.cjs.js"
   },
   "scripts": {
-    "build": "tsc --emitDeclarationOnly && esbuild src/index.ts --bundle --platform=node --format=cjs --minify --outfile=dist/index.cjs.js && esbuild src/index.ts --bundle --platform=node --format=esm --minify --outfile=dist/index.mjs.js"
+    "build:esbuild": "esbuild src/index.ts --bundle --platform=node --format=cjs --outfile=dist/index.cjs.js && esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.mjs.js",
+    "build:babel": "babel dist/index.cjs.js --out-file dist/index.cjs.js --config-file ./babel.config.json && terser dist/index.cjs.js -c -m -o dist/index.cjs.js && babel dist/index.mjs.js --out-file dist/index.mjs.js --config-file ./babel.config.json && terser dist/index.mjs.js -c -m -o dist/index.mjs.js",
+    "build": "tsc --emitDeclarationOnly && npm run build:esbuild && npm run build:babel"
   },
   "description": "A Nepali Date Library for both typescript and javascript",
   "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.3",
+    "@babel/preset-env": "^7.28.3",
     "@types/node": "^22.13.5",
-    "esbuild": "^0.25.0",
-    "typescript": "^5.7.3"
+    "esbuild": "^0.25.9",
+    "terser": "^5.43.1",
+    "typescript": "^5.9.2"
   },
   "keywords": [
     "nepal",
