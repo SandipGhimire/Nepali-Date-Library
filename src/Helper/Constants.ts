@@ -134,7 +134,7 @@ NEPALI_DATE_MAP.forEach((entry) => {
     entry.daysTillNow = totalDays;
 });
 
-export const EPOCH: number = new Date(1919, 3, 13).getTime();
+export const EPOCH: number = Date.UTC(1919, 3, 13);
 
 //WEEK
 export const WEEK_EN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

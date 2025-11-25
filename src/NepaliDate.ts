@@ -107,7 +107,14 @@ export class NepaliDate {
      */
     private setEnglishDate(date: Date): void {
         this.timestamp = date;
-        let daysCount = Math.floor((this.timestamp.getTime() - EPOCH) / 86400000);
+
+        const utcTime = Date.UTC(
+            date.getUTCFullYear(),
+            date.getUTCMonth(),
+            date.getUTCDate()
+        );
+
+        let daysCount = Math.floor((utcTime - EPOCH) / 86400000);
         let idx = Math.floor(daysCount / 366);
 
         while (daysCount >= NEPALI_DATE_MAP[idx].daysTillNow) {
@@ -261,7 +268,10 @@ export class NepaliDate {
             d += tmp.days[i];
         }
         d += date - 1;
-        this.setEnglishDate(new Date(EPOCH + d * 86400000));
+        const utcTimestamp = EPOCH + d * 86400000;
+        const utcDate = new Date(utcTimestamp);
+
+        this.setEnglishDate(utcDate);
     }
 
     /**
@@ -816,8 +826,8 @@ export class NepaliDate {
         let startMonth = (quarter - 1) * 3 + 3;
 
         if (quarter === 4) {
-                startYear = currentFiscalYear + 1;
-                startMonth = 0;
+            startYear = currentFiscalYear + 1;
+            startMonth = 0;
         }
 
         if (startMonth > 11) {

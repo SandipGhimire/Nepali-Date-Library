@@ -10,7 +10,9 @@ export const ADtoBS = (adDate: string): string => {
         throw new Error('Invalid date format. Expected format: YYYY-MM-DD');
     }
 
-    const ad = new Date(adDate);
+    // CRITICAL FIX: Parse date as UTC to avoid timezone shifts
+    const [year, month, day] = adDate.split('-').map(Number);
+    const ad = new Date(Date.UTC(year, month - 1, day));
 
     if (Number.isNaN(ad.getTime())) {
         throw new Error(`Invalid date input '${adDate}'`);
@@ -20,7 +22,7 @@ export const ADtoBS = (adDate: string): string => {
         const nepaliDate = new NepaliDate(ad);
         return nepaliDate.format('YYYY-MM-DD');
     } catch (err) {
-        console.error('Error During Date Conversion : ', err)
+        console.error('Error During Date Conversion : ', err);
         throw new Error('Failed to convert AD to BS');
     }
 };
@@ -35,12 +37,14 @@ export function BStoAD(bsDate: string): string {
         if (!/^\d{4}-\d{2}-\d{2}$/.test(bsDate)) {
             throw new Error('Invalid date format. Expected format: YYYY-MM-DD');
         }
+        
         const nepaliDateInstance = bsDate ? new NepaliDate(bsDate) : new NepaliDate();
         const pad = (n: number) => (n < 10 ? `0${n}` : `${n}`);
         const date = nepaliDateInstance.getEnglishDate();
-        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+        
+        return `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}`;
     } catch (err) {
-        console.error('Error During Date Conversion : ', err)
+        console.error('Error During Date Conversion : ', err);
         throw new Error('Failed to convert BS to AD');
     }
 }
