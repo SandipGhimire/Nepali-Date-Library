@@ -1,4 +1,28 @@
 export const NEPALI_DATE_MAP: {year:number, days: Array<number>, totalDays: number, daysTillNow:number}[] = [
+    { year: 1976, days: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31], totalDays: 0, daysTillNow: 0 },
+    { year: 1977, days: [30, 32, 31, 32, 31, 31, 29, 30, 29, 30, 29, 31], totalDays: 0, daysTillNow: 0 },
+    { year: 1978, days: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1979, days: [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1980, days: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31], totalDays: 0, daysTillNow: 0 },
+    { year: 1981, days: [31, 31, 31, 32, 31, 31, 29, 30, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1982, days: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1983, days: [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1984, days: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31], totalDays: 0, daysTillNow: 0 },
+    { year: 1985, days: [31, 31, 31, 32, 31, 31, 29, 30, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1986, days: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1987, days: [31, 32, 31, 32, 31, 30, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1988, days: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31], totalDays: 0, daysTillNow: 0 },
+    { year: 1989, days: [31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1990, days: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1991, days: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1992, days: [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31], totalDays: 0, daysTillNow: 0 },
+    { year: 1993, days: [31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1994, days: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1995, days: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1996, days: [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31], totalDays: 0, daysTillNow: 0 },
+    { year: 1997, days: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1998, days: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
+    { year: 1999, days: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31], totalDays: 0, daysTillNow: 0 },
     { year: 2000, days: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31], totalDays: 0, daysTillNow: 0 },
     { year: 2001, days: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
     { year: 2002, days: [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30], totalDays: 0, daysTillNow: 0 },
@@ -110,7 +134,7 @@ NEPALI_DATE_MAP.forEach((entry) => {
     entry.daysTillNow = totalDays;
 });
 
-export const EPOCH: number = new Date(1943, 3, 14).getTime();
+export const EPOCH: number = new Date(1919, 3, 13).getTime();
 
 //WEEK
 export const WEEK_EN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

@@ -637,7 +637,7 @@ export class NepaliDate {
             prevYear--;
         }
 
-        if (prevYear > NEPALI_DATE_MAP[0].year) {
+        if (prevYear >= NEPALI_DATE_MAP[0].year) {
             prevMonthMap.year = prevYear;
             prevMonthMap.month = prevMonth;
         }
