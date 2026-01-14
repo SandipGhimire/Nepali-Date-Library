@@ -6,31 +6,46 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=24.0.0 <25.0.0"
+  },
   "license": "MIT",
   "author": "Sandip Ghimire",
   "main": "dist/index.cjs.js",
   "module": "dist/index.mjs.js",
   "types": "dist/index.d.ts",
-  "exports": {
-    "types": "./dist/index.d.ts",
-    "import": "./dist/index.mjs.js",
-    "require": "./dist/index.cjs.js",
-    "default": "./dist/index.umd.js"
-  },
   "scripts": {
-    "build:esbuild": "esbuild src/index.ts --bundle --platform=node --format=cjs --outfile=dist/index.cjs.js && esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.mjs.js",
-    "build:babel": "babel dist/index.cjs.js --out-file dist/index.cjs.js --config-file ./babel.config.json && terser dist/index.cjs.js -c -m -o dist/index.cjs.js && babel dist/index.mjs.js --out-file dist/index.mjs.js --config-file ./babel.config.json && terser dist/index.mjs.js -c -m -o dist/index.mjs.js",
-    "build": "tsc --emitDeclarationOnly && npm run build:esbuild && npm run build:babel"
+    "prebuild": "pnpm run lint",
+    "lint": "eslint src --max-warnings 0 --flag unstable_native_nodejs_ts_config",
+    "lint:fix": "eslint src --max-warnings 0 --fix --flag unstable_native_nodejs_ts_config",
+    "build:esbuild": "pnpm run build:esbuild:cjs && pnpm run build:esbuild:mjs",
+    "build:esbuild:cjs": "esbuild src/index.ts --bundle --platform=node --format=cjs --outfile=dist/index.cjs.js",
+    "build:esbuild:mjs": "esbuild src/index.ts --bundle --platform=neutral --format=esm --outfile=dist/index.mjs",
+    "build:babel": "pnpm run build:babel:cjs && pnpm run build:terser:cjs && pnpm run build:babel:mjs && pnpm run build:terser:mjs",
+    "build:babel:cjs": "babel dist/index.cjs.js --out-file dist/index.cjs.js --config-file ./babel.config.json",
+    "build:terser:cjs": "terser dist/index.cjs.js -c -m -o dist/index.cjs.js",
+    "build:babel:mjs": "babel dist/index.mjs.js --out-file dist/index.mjs.js --config-file ./babel.config.json",
+    "build:terser:mjs": "terser dist/index.mjs.js -c -m -o dist/index.mjs.js",
+    "build": "tsc --emitDeclarationOnly && pnpm run build:esbuild && pnpm run build:babel",
+    "format": "prettier --write src/"
   },
   "description": "A Nepali Date Library for both typescript and javascript",
   "devDependencies": {
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@types/node": "^24.10.1",
-    "esbuild": "^0.27.0",
+    "@babel/cli": "^7.28.6",
+    "@babel/core": "^7.28.6",
+    "@babel/preset-env": "^7.28.6",
+    "@eslint/js": "^9.39.2",
+    "@types/node": "^24.10.8",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.2",
+    "eslint-plugin-prettier": "^5.5.5",
+    "jest": "^30.2.0",
+    "prettier": "^3.7.4",
     "terser": "^5.44.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.53.0"
   },
   "keywords": [
     "nepal",
