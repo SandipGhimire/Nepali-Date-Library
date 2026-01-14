@@ -2,8 +2,8 @@ import { NepaliDate } from "../NepaliDate";
 
 /**
  * Converts a Anno Domini (AD) date to an Bikram Sambat(BS) Date.
- * @param {string} adDate - The Anno Domini (AD) date in "YYYY-MM-DD" format.
- * @returns {string} - The corresponding Bikram Sambat(BS) date in "YYYY-MM-DD" format.
+ * @param adDate The Anno Domini (AD) date in "YYYY-MM-DD" format.
+ * @returns The corresponding Bikram Sambat(BS) date in "YYYY-MM-DD" format.
  */
 export const ADtoBS = (adDate: string): string => {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(adDate)) {
@@ -29,8 +29,8 @@ export const ADtoBS = (adDate: string): string => {
 
 /**
  * Converts a Bikram Sambat(BS) to an Anno Domini (AD) Date.
- * @param bsDate - The Bikram Sambat(BS) date in "YYYY-MM-DD" format.
- * @returns {string} - The corresponding Anno Domini (AD) date in "YYYY-MM-DD" format.
+ * @param bsDate The Bikram Sambat(BS) date in "YYYY-MM-DD" format.
+ * @returns The corresponding Anno Domini (AD) date in "YYYY-MM-DD" format.
  */
 export function BStoAD(bsDate: string): string {
   try {

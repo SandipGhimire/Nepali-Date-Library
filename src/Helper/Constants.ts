@@ -1,3 +1,7 @@
+/**
+ * Array of objects representing the Nepali calendar.
+ * Each object contains the year, days in each month, total days, and days till now.
+ */
 export const NEPALI_DATE_MAP: {
   year: number;
   days: number[];
@@ -767,12 +771,27 @@ NEPALI_DATE_MAP.forEach((entry) => {
 export const EPOCH: number = Date.UTC(1919, 3, 13);
 
 //WEEK
+/**
+ * Array of English week days.
+ */
 export const WEEK_EN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+/**
+ * Array of short English week days.
+ */
 export const WEEK_SHORT_EN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+/**
+ * Array of Nepali week days.
+ */
 export const WEEK_NP = ["आइतबार", "सोमबार", "मंगलबार", "बुधबार", "बिहिबार", "शुक्रबार", "शनिबार"];
+/**
+ * Array of short Nepali week days.
+ */
 export const WEEK_SHORT_NP = ["आइत", "सोम", "मंगल", "बुध", "बिहि", "शुक्र", "शनि"];
 
 //Month
+/**
+ * Array of English months.
+ */
 export const MONTH_EN = [
   "Baisakh",
   "Jestha",
@@ -787,7 +806,13 @@ export const MONTH_EN = [
   "Falgun",
   "Chaitra",
 ];
+/**
+ * Array of short English months.
+ */
 export const MONTH_SHORT_EN = ["Bai", "Jes", "Asa", "Shr", "Bhd", "Asw", "Kar", "Man", "Pou", "Mag", "Fal", "Cha"];
+/**
+ * Array of Nepali months.
+ */
 export const MONTH_NP = [
   "बैशाख",
   "जेठ",
@@ -802,7 +827,13 @@ export const MONTH_NP = [
   "फाल्गुण",
   "चैत्र",
 ];
+/**
+ * Array of short Nepali months.
+ */
 export const MONTH_SHORT_NP = ["बै", "जे", "अ", "श्रा", "भा", "आ", "का", "मं", "पौ", "मा", "फा", "चै"];
 
 //Number
+/**
+ * Array of Nepali numbers.
+ */
 export const NUMBER_NP = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
