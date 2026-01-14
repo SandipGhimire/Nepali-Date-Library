@@ -33,11 +33,10 @@ export const ADtoBS = (adDate: string): string => {
  * @returns The corresponding Anno Domini (AD) date in "YYYY-MM-DD" format.
  */
 export function BStoAD(bsDate: string): string {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(bsDate)) {
+    throw new Error("Invalid date format. Expected format: YYYY-MM-DD");
+  }
   try {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(bsDate)) {
-      throw new Error("Invalid date format. Expected format: YYYY-MM-DD");
-    }
-
     const nepaliDateInstance = bsDate ? new NepaliDate(bsDate) : new NepaliDate();
     const pad = (n: number) => (n < 10 ? `0${String(n)}` : String(n));
     const date = nepaliDateInstance.getEnglishDate();

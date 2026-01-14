@@ -73,7 +73,7 @@ export class NepaliDate {
    * @param date Source date as Date, NepaliDate, timestamp, or string (optional)
    */
   constructor(yearOrDate?: Date | NepaliDate | number | string, month?: number, day?: number) {
-    if (yearOrDate == undefined) {
+    if (yearOrDate == undefined && yearOrDate !== null) {
       this.setEnglishDate(new Date());
     } else if (typeof yearOrDate === "object") {
       if (yearOrDate instanceof Date) {
@@ -251,6 +251,9 @@ export class NepaliDate {
    */
   public set(year: number, month: number, date: number): void {
     const idx = year + Math.floor(month / 12) - NEPALI_DATE_MAP[0].year;
+    if (idx < NEPALI_DATE_MAP[0].year || idx > NEPALI_DATE_MAP[NEPALI_DATE_MAP.length - 1].year) {
+      throw new Error("Nepal year out of range!");
+    }
     const tmp = NEPALI_DATE_MAP[idx];
     let d = tmp.daysTillNow - tmp.totalDays;
 
