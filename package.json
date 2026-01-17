@@ -11,6 +11,11 @@
   },
   "license": "MIT",
   "author": "Sandip Ghimire",
+  "homepage": "https://nepalidate.sandip-ghimire.com.np",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SandipGhimire/nepali-date-library.git"
+  },
   "main": "dist/index.cjs.js",
   "module": "dist/index.mjs.js",
   "types": "dist/index.d.ts",
@@ -54,21 +59,32 @@
     "typescript-eslint": "^8.53.0"
   },
   "keywords": [
+    "nepali",
     "nepal",
     "nepali-date-library",
-    "nepali",
+    "nepali-calendar",
     "nepali-date",
+    "bikram-sambat",
+    "bikram-sambat-date",
+    "bs-date",
+    "date-conversion",
     "nepali-date-converter",
+    "nepali-time",
+    "nepali-datetime",
     "date-converter",
     "ad-bs",
     "ad-to-bs",
-    "bs-ad",
     "bikram-sambat",
     "typescript",
     "javascript",
+    "nodejs",
+    "browser",
+    "esbuild",
+    "module",
+    "esm",
+    "cjs",
     "BS date",
     "AD to BS",
-    "BS to AD",
-    "nepali-ad-bs"
+    "BS to AD"
   ]
 }
