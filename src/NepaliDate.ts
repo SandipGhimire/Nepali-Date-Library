@@ -251,7 +251,7 @@ export class NepaliDate {
    */
   public set(year: number, month: number, date: number): void {
     const idx = year + Math.floor(month / 12) - NEPALI_DATE_MAP[0].year;
-    if (idx < NEPALI_DATE_MAP[0].year || idx > NEPALI_DATE_MAP[NEPALI_DATE_MAP.length - 1].year) {
+    if (idx < 0 || idx >= NEPALI_DATE_MAP.length) {
       throw new Error("Nepal year out of range!");
     }
     const tmp = NEPALI_DATE_MAP[idx];

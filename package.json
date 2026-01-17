@@ -18,6 +18,7 @@
     "prebuild": "pnpm run lint",
     "lint": "eslint src --max-warnings 0 --flag unstable_native_nodejs_ts_config",
     "lint:fix": "eslint src --max-warnings 0 --fix --flag unstable_native_nodejs_ts_config",
+    "test": "pnpm run test:node && pnpm run test:browser",
     "test:node": "jest --silent=false --selectProjects node",
     "test:browser": "jest --selectProjects browser",
     "build:esbuild": "pnpm run build:esbuild:cjs && pnpm run build:esbuild:mjs",
