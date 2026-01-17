@@ -73,7 +73,7 @@ export class NepaliDate {
    * @param date Source date as Date, NepaliDate, timestamp, or string (optional)
    */
   constructor(yearOrDate?: Date | NepaliDate | number | string, month?: number, day?: number) {
-    if (yearOrDate == undefined && yearOrDate !== null) {
+    if (yearOrDate == undefined) {
       this.setEnglishDate(new Date());
     } else if (typeof yearOrDate === "object") {
       if (yearOrDate instanceof Date) {
