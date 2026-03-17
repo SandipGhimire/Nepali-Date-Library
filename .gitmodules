@@ -1,0 +1,9 @@
+[submodule "Docs"]
+	path = Docs
+	url = git@github.com:SandipGhimire/Nepali-Date-Library-Docs.git
+[submodule "NodeJS"]
+	path = NodeJS
+	url = git@github.com:SandipGhimire/Nepali-Date-Library-NodeJS.git
+[submodule "Python"]
+	path = Python
+	url = git@github.com:SandipGhimire/Nepali-Date-Library-Python.git
