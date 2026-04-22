@@ -13,17 +13,23 @@ A comprehensive, multi-language ecosystem for working with **Nepali (Bikram Samb
 This project is organized into multiple submodules, each targeting a specific language or purpose:
 
 ### 📦 [NodeJS Library](./NodeJS)
+
 The core **TypeScript/JavaScript** library for BS/AD conversion, manipulation, and formatting.
+
 - **Installation**: `npm install nepali-date-library`
 - **Source**: [Nepali-Date-Library-NodeJS](https://github.com/SandipGhimire/Nepali-Date-Library-NodeJS)
 
 ### 🐍 [Python Library](./Python)
+
 The **Python** port of the `NepaliDate` library, offering consistent functionality for Python applications.
+
 - **Installation**: `pip install nepali-date-library`
 - **Source**: [Nepali-Date-Library-Python](https://github.com/SandipGhimire/Nepali-Date-Library-Python)
 
 ### 📚 [Documentation Hub](./Docs)
+
 The central source of truth for all implementations, providing detailed API references, guides, and examples.
+
 - **Website**: [nepalidate.sandip-ghimire.com.np](https://nepalidate.sandip-ghimire.com.np)
 - **Source**: [Nepali-Date-Library-Docs](https://github.com/SandipGhimire/Nepali-Date-Library-Docs)
 
@@ -43,6 +49,7 @@ The central source of truth for all implementations, providing detailed API refe
 ## 🛠 Usage Preview
 
 #### Node JS
+
 ```ts
 import { NepaliDate } from "nepali-date-library";
 
@@ -51,6 +58,7 @@ console.log(date.format("YYYY-MM-DD"));
 ```
 
 #### Python
+
 ```python
 from nepali_date_library import NepaliDate
 
