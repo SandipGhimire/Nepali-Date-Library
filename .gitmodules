@@ -7,3 +7,6 @@
 [submodule "Python"]
 	path = Python
 	url = https://github.com/SandipGhimire/Nepali-Date-Library-Python.git
+[submodule "PHP"]
+	path = PHP
+	url = https://github.com/SandipGhimire/Nepali-Date-Library-PHP.git

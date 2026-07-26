@@ -1,7 +1,7 @@
 # Nepali Date Library Ecosystem 🇳🇵
 
 [![Support](https://img.shields.io/badge/Support-Bikram%20Sambat-red.svg)](#)
-[![Platforms](https://img.shields.io/badge/Platforms-NodeJS%20%7C%20Python-blue.svg)](#)
+[![Platforms](https://img.shields.io/badge/Platforms-NodeJS%20%7C%20Python%20%7C%20PHP-blue.svg)](#)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 
 A comprehensive, multi-language ecosystem for working with **Nepali (Bikram Sambat)** dates. This repository serves as the central hub for various language-specific implementations and the official documentation.
@@ -25,6 +25,13 @@ The **Python** port of the `NepaliDate` library, offering consistent functionali
 
 - **Installation**: `pip install nepali-date-library`
 - **Source**: [Nepali-Date-Library-Python](https://github.com/SandipGhimire/Nepali-Date-Library-Python)
+
+### 🐘 [PHP Library](./PHP)
+
+The **PHP** port of the `NepaliDate` library, distributed as a Composer package.
+
+- **Installation**: `composer require sghimire/nepali-date-library`
+- **Source**: [Nepali-Date-Library-PHP](https://github.com/SandipGhimire/Nepali-Date-Library-PHP)
 
 ### 📚 [Documentation Hub](./Docs)
 
@@ -64,6 +71,15 @@ from nepali_date_library import NepaliDate
 
 date = NepaliDate()
 print(date.format("YYYY-MM-DD"))
+```
+
+#### PHP
+
+```php
+use NepaliDateLibrary\NepaliDate;
+
+$date = new NepaliDate();
+echo $date->format("YYYY-MM-DD");
 ```
 
 ---
