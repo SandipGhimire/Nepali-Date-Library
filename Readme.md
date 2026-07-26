@@ -76,6 +76,7 @@ print(date.format("YYYY-MM-DD"))
 #### PHP
 
 ```php
+// composer require sghimire/nepali-date-library
 use NepaliDateLibrary\NepaliDate;
 
 $date = new NepaliDate();
