@@ -10,3 +10,6 @@
 [submodule "PHP"]
 	path = PHP
 	url = https://github.com/SandipGhimire/Nepali-Date-Library-PHP.git
+[submodule "CMD"]
+	path = CMD
+	url = https://github.com/SandipGhimire/Nepali-Date-Library-CMD.git
